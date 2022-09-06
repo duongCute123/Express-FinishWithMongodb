@@ -24,6 +24,18 @@ app.post("/create", function (req, res) {
                 .json({ 'customer': 'Thêm dữ liệu thành công' })
         })
 })
+//Lấy dữ liệu từ server gửi về và hiển thị lên giao diện
+app.get("/getList", function (req, res) {
+    Customer.find({}, function (err, customer) {
+        if (!err) {
+            res.json(customer)
+        }
+        else {
+            res.status(400)
+                .json({ 'err': 'Lỗi lấy dữ liệu nhá bạn' })
+        }
+    })
+})
 var service = app.listen(8000, function (host, port) {
     var host = service.address().address
     var port = service.address().port
